@@ -31,6 +31,9 @@ void alphaString(char *str){
         if(isalpha(*read)){
             *write = *read;
             write++;
+        }else if (*read == ' '){
+            *write = '_';
+            write++;
         }
         read++;
     }
