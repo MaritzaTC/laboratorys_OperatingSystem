@@ -1,0 +1,45 @@
+# Practice 1 - Operating Systems Lab
+
+**Integrantes:**
+
+- [X] [Maritza Tabares Cárdenas](https://github.com/MaritzaTC)
+- [X] [Juan David Vasquez Ospina](https://github.com/JuanVasquezO)
+
+> [!IMPORTANT]  
+> This project is for educational purposes only.
+
+This project is part of the Operating Systems Lab course at the University of Antioquia. The primary goal of this practice is to deepen your understanding of pointers, string manipulation, and basic control structures in C/C++ and Go programming languages. Additionally, this practice encourages efficient memory usage and emphasizes careful handling of edge cases.
+
+## Objectives
+- Learn how pointers can be used to manipulate data in memory directly.
+- Perform operations such as reversing strings, counting vowels and consonants, and modifying strings using pointers.
+-  Implement the program without allocating additional memory for operations, promoting in-place data manipulation.
+- Ensure the program handles edge cases like empty strings, non-alphabetic characters, and mixed inputs correctly.
+
+## Structure
+- **Source Code**: Contains the implementation of the practice.
+- **Documentation**: Includes explanations and analysis of the results.
+
+## How to Run
+1. Compile the source code using the provided Makefile or your preferred compiler.
+2. Execute the program following the instructions in the documentation.
+
+## Requirements
+### For C/C++
+- C/C++ Compiler: You will need a C or C++ compiler. **Examples include**:
+
+1. GCC (GNU Compiler Collection)
+
+2. Clang
+
+3. MinGW (for Windows users)
+###  For Go
+
+- Go Compiler: Install Go on your system. 
+
+
+
+
+## Conclusion
+This practice will help you better understand how to use pointers to manipulate data directly in memory, which is an essential skill in operating systems and low-level programming. By the end of the exercise, you should have a solid understanding of how to handle strings in a memory-efficient way and how to implement basic string manipulation tasks using pointers.
+
