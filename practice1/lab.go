@@ -71,6 +71,11 @@ func main() {
 	fmt.Print("Enter a string (maximum 100 characters): ")
 	input, _ := reader.ReadString('\n')
 
+	// Truncate to 100 characters if it exceeds the limit
+	if len(input) > 100 {
+		input = input[:100]
+	}
+
 	// Clean input (remove non-alphabetic, keep spaces)
 	cleaned := cleanASCIIString(input)
 
@@ -90,9 +95,15 @@ func main() {
 	replaceSpacesWithUnderscore(&bytes)
 
 	fmt.Println("Number of vowels:", vowelCount)
-	for v, c := range vowelMap {
-		fmt.Printf("Number of \"%c\": %d\n", v, c)
+
+	// Display vowels in alphabetical order
+	orderedVowels := []byte{'a', 'e', 'i', 'o', 'u'}
+	for _, v := range orderedVowels {
+		if count, exists := vowelMap[v]; exists {
+			fmt.Printf("Number of \"%c\": %d\n", v, count)
+		}
 	}
+
 	fmt.Println("Number of consonants:", consonantCount)
 	fmt.Println("Modified string:", string(bytes))
 }
