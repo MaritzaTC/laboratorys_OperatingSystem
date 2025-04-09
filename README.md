@@ -2,7 +2,7 @@
 
 **Integrantes:**
 
-- [X] [Maritza Tabares Cárdenas](https://github.com/MaritzaTC)
+- [X] [Maritza Tabarez Cárdenas](https://github.com/MaritzaTC)
 - [X] [Juan David Vasquez Ospina](https://github.com/JuanVasquezO)
 
 > [!IMPORTANT]  
