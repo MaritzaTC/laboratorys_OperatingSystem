@@ -32,7 +32,16 @@ void writeMatrix(const char *filename, int *matrix, int rows, int cols) {
     }
     fclose(fp);
 }
-
+void sequentialMatrixMultiplication(int *A, int *B, int *C) {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < P; j++) {
+            C[i * P + j] = 0;
+            for (int k = 0; k < M; k++) {
+                C[i * P + j] += A[i * M + k] * B[k * P + j];
+            }
+        }
+    }
+}
 int main() {
     int A[N * M];
     int B[M * P];
@@ -43,20 +52,13 @@ int main() {
 
     clock_t start = clock();
 
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < P; j++) {
-            C[i * P + j] = 0;
-            for (int k = 0; k < M; k++) {
-                C[i * P + j] += A[i * M + k] * B[k * P + j];
-            }
-        }
-    }
+    sequentialMatrixMultiplication(A, B, C);
 
     clock_t end = clock();
-    double elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+    double sequential_time = (double)(end - start) / CLOCKS_PER_SEC;
 
     writeMatrix("C.txt", C, N, P);
 
-    printf("Sequencial time: %.4f seconds\n", elapsed);
+    printf("Sequencial time: %.4f seconds\n", sequential_time);
     return 0;
 }
