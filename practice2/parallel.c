@@ -11,7 +11,7 @@
 #include <time.h>
 
 
-#define NUM_PROCESOS 4
+#define NUM_PROCESSES 4
 
 void readMatrix(const char *filename, int *matrix, int rows, int cols)
 {
@@ -92,9 +92,9 @@ int main()
 
     clock_t start = clock();
 
-    int rows_per_proc = N / NUM_PROCESOS;
+    int rows_per_proc = N / NUM_PROCESSES;
 
-    for (int p = 0; p < NUM_PROCESOS; p++)
+    for (int p = 0; p < NUM_PROCESSES; p++)
     {
         pid_t pid = fork();
         if (pid == -1) {
@@ -111,7 +111,7 @@ int main()
         if (pid == 0)  // Child process
         {
             int start_row = p * rows_per_proc;
-            int end_row = (p == NUM_PROCESOS - 1) ? N : start_row + rows_per_proc;
+            int end_row = (p == NUM_PROCESSES - 1) ? N : start_row + rows_per_proc;
 
             for (int i = start_row; i < end_row; i++)
             {
@@ -132,7 +132,7 @@ int main()
 
     // Parent process waits for all children
     int status;
-    for (int p = 0; p < NUM_PROCESOS; p++)
+    for (int p = 0; p < NUM_PROCESSES; p++)
     {
         pid_t child_pid = wait(&status);
         if (child_pid == -1) {
@@ -161,7 +161,7 @@ int main()
     double parallel_time = (double)(end - start) / CLOCKS_PER_SEC;
 
     writeMatrix("C.txt", sharedC, N, P);
-    printf("Parallel time: %.4f seconds\n", parallel_time);
+    printf("Parallel time (%d processes): %.4f seconds\n",NUM_PROCESSES, parallel_time);
 
     shmdt(sharedC);  // Detach the shared memory
     shmctl(shmid, IPC_RMID, NULL);  // Clean up the shared memory
