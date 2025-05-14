@@ -33,7 +33,7 @@ double execute_and_capture_time(const char *command, const char *search_for) {
 int main() {
     // Comandos para ejecutar los programas secuenciales y paralelos
     const char *sequential_command = "./sequential";
-    const char *parallel_command = "./parallel_matrix_multiply";
+    const char *parallel_command = "./parallel";
 
     // Ejecutar los programas y capturar los tiempos
     double sequential_time = execute_and_capture_time(sequential_command, "Sequential time");
