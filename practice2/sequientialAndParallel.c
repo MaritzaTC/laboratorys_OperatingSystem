@@ -19,7 +19,7 @@ void readMatrix(const char *filename, int *matrix, int rows, int cols) {
         exit(EXIT_FAILURE);
     }
     for (int i = 0; i < rows * cols; i++) {
-        if (fscanf(fp, "%d", &matrix[i]) != 1) {
+        if (fscanf(fp, "%lf", &matrix[i]) != 1) {
             fprintf(stderr, "Error: file '%s' has less data than expected (%d items expected).\n", filename, rows * cols);
             fclose(fp);
             exit(EXIT_FAILURE);
@@ -36,14 +36,14 @@ void writeMatrix(const char *filename, int *matrix, int rows, int cols) {
     }
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            fprintf(fp, "%d ", matrix[i * cols + j]);
+            fprintf(fp, "%.6lf ", matrix[i * cols + j]);
         }
         fprintf(fp, "\n");
     }
     fclose(fp);
 }
 
-void sequentialMatrixMultiplication(int *A, int *B, int *C, int N, int M, int P) {
+void sequentialMatrixMultiplication(double  *A, double  *B, double  *C, int N, int M, int P) {
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < P; j++) {
             C[i * P + j] = 0;
@@ -54,14 +54,14 @@ void sequentialMatrixMultiplication(int *A, int *B, int *C, int N, int M, int P)
     }
 }
 
-void parallelMatrixMultiplication(int *A, int *B, int *C, int N, int M, int P) {
+void parallelMatrixMultiplication(double *A, double *B, double *C, int N, int M, int P) {
     int shmid = shmget(IPC_PRIVATE, sizeof(int) * N * P, IPC_CREAT | 0666);
     if (shmid < 0) {
         perror("shmget");
         exit(EXIT_FAILURE);
     }
 
-    int *sharedC = (int *)shmat(shmid, NULL, 0);
+    double *sharedC = (int *)shmat(shmid, NULL, 0);
     if ((intptr_t)sharedC == -1) {
         perror("shmat");
         exit(EXIT_FAILURE);
@@ -115,10 +115,10 @@ int main() {
     printf("Enter M: "); scanf("%d", &M);
     printf("Enter P: "); scanf("%d", &P);
 
-    int *A = malloc(N * M * sizeof(int));
-    int *B = malloc(M * P * sizeof(int));
-    int *C_seq = malloc(N * P * sizeof(int));
-    int *C_par = malloc(N * P * sizeof(int));
+    int *A = malloc(N * M * sizeof(double));
+    int *B = malloc(M * P * sizeof(double));
+    int *C_seq = malloc(N * P * sizeof(double));
+    int *C_par = malloc(N * P * sizeof(double));
 
     if (!A || !B || !C_seq || !C_par) {
         fprintf(stderr, "Error allocating memory.\n");
@@ -148,7 +148,7 @@ int main() {
     for (int i = 0; i < N * P; i++) {
         if (C_seq[i] != C_par[i]) {
             correct = 0;
-            printf("Mismatch at index %d: seq = %d, par = %d\n", i, C_seq[i], C_par[i]);
+            printf("Mismatch at index %d: seq =  %.6lf,, par = %.6lf\n", i, C_seq[i], C_par[i]);
             break;
         }
     }
