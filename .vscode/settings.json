@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "sequential.C": "cpp"
+        "sequential.C": "cpp",
+        "stdlib.h": "c"
     }
 }
