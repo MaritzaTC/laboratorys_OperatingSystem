@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <time.h>
 
-#define NUM_PROCESSES 3
+#define NUM_PROCESSES 1
 
 void readMatrix(const char *filename, int *matrix, int rows, int cols) {
     FILE *fp = fopen(filename, "r");
@@ -125,8 +125,8 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
-    readMatrix("A.txt", A, N, M);
-    readMatrix("B.txt", B, M, P);
+    readMatrix("A_small.txt", A, N, M);
+    readMatrix("B_small.txt", B, M, P);
 
     // Secuencial
     clock_t start_seq = clock();
@@ -141,7 +141,7 @@ int main() {
     double time_par = (double)(end_par - start_par) / CLOCKS_PER_SEC;
 
     // Guardar resultado paralelo (ambos deberían ser iguales)
-    writeMatrix("C.txt", C_par, N, P);
+    writeMatrix("C_small.txt", C_par, N, P);
 
     // Comparar resultados
     int correct = 1;
