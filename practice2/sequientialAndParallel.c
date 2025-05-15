@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <time.h>
 
-#define NUM_PROCESSES 1
+#define NUM_PROCESSES 2
 
 void readMatrix(const char *filename, double *matrix, int rows, int cols) {
     FILE *fp = fopen(filename, "r");
