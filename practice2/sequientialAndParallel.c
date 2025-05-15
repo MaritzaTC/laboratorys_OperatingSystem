@@ -125,7 +125,7 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
-    readMatrix("A-big.txt", A, N, M);
+    readMatrix("A_big.txt", A, N, M);
     readMatrix("B_big.txt", B, M, P);
 
     // Secuencial
