@@ -1,4 +1,4 @@
-# Multiplicación de Matrices con Procesos Paralelos en C
+# Multiplicación de Matrices con Procesos Paralelos en C y go
 
 Universidad de Antioquia  
 Curso: Sistemas Operativos  
@@ -14,9 +14,9 @@ Práctica #2 - Multiplicación de matrices con procesos
 ##  Objetivos
 
 - Comprender la creación de procesos usando `fork()`.
-- Implementar cómputo paralelo mediante procesos múltiples.
-- Usar mecanismos de comunicación entre procesos (IPC), como memoria compartida.
-- Comparar el rendimiento entre ejecución secuencial y paralela.
+- Implementar cómputo paralelo dividiendo la carga de trabajo entre múltiples procesos (en C) o gorutinas (en Go) usando APIs del sistema operativo.
+- Aprender y aplicar mecanismos de comunicación entre procesos (IPC), como pipes o memoria compartida (en C), y canales o estructuras para compartir memoria (en Go).
+- Analizar y comparar el rendimiento entre las implementaciones secuenciales y paralelas de la multiplicación de matrices.
 
 ---
 
@@ -28,6 +28,7 @@ Desarrollar un programa en C que multiplique dos matrices grandes:
 - Matriz B (M×P)  
 - Resultado: Matriz C (N×P)
 
+## Para C
 Se debe implementar:
 
 -  Versión secuencial (`sequential.c`)  
@@ -56,7 +57,7 @@ gcc sequientialAndParallel.c -o parallel_matrix_multiply
 Al ejecutar, el programa pedirá las dimensiones de las matrices (N, M, P) y leerá los datos desde los archivos A.txt y B.txt. El resultado se escribirá en C.txt.
 
 ## Entrada y Salida
-Entrada: Archivos A.txt y B.txt con los valores de las matrices.
+Entrada: Archivos A.txt, A_small.txt, A_big y B.txt,B_small.txt, B_big con los valores de las matrices.
 
 Salida: Archivo C.txt con la matriz resultado.
 
@@ -74,6 +75,10 @@ Para la implementación paralela, se utilizó memoria compartida (Shared Memory)
 
 
 ### Análisis de Rendimiento
+Algunos pantallazos de los resultados 
+![alt text](<Screenshot 2025-05-14 183333.png>)
+![alt text](<Screenshot 2025-05-14 190748.png>)
+![alt text](<Screenshot 2025-05-14 195626.png>)
 
 ## Tabla de tiempos y speedup
 
@@ -119,3 +124,10 @@ Para la implementación paralela, se utilizó memoria compartida (Shared Memory)
     Esta caída puede ser causada por la sobrecarga de comunicación y sincronización entre procesos cuando se usan más de dos procesos, o limitaciones de hardware (como número de núcleos físicos disponibles).
 
     Aún así, la paralelización es claramente beneficiosa para cargas de trabajo grandes.
+
+
+
+
+ ## References
+ • OSTEP: Processes API Chapter.
+ • Linux man pages: fork(), shmget(), pipe()
