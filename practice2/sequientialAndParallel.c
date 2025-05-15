@@ -55,7 +55,7 @@ void sequentialMatrixMultiplication(double  *A, double  *B, double  *C, int N, i
 }
 
 void parallelMatrixMultiplication(double *A, double *B, double *C, int N, int M, int P) {
-    int shmid = shmget(IPC_PRIVATE, sizeof(int) * N * P, IPC_CREAT | 0666);
+    double  shmid = shmget(IPC_PRIVATE, sizeof(double ) * N * P, IPC_CREAT | 0666);
     if (shmid < 0) {
         perror("shmget");
         exit(EXIT_FAILURE);
