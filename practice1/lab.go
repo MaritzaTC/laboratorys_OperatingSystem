@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-// Removes non-alphabetic (except space) and non-ASCII characters using pointer
+// Removes non-alphabetic (except space) and non-ASCII characters
 func cleanASCIIString(s string) string {
 	var cleaned []byte
 	for i := 0; i < len(s); i++ {
