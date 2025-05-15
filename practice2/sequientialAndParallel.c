@@ -12,7 +12,7 @@
 
 #define NUM_PROCESSES 1
 
-void readMatrix(const char *filename, int *matrix, int rows, int cols) {
+void readMatrix(const char *filename, double *matrix, int rows, int cols) {
     FILE *fp = fopen(filename, "r");
     if (!fp) {
         fprintf(stderr, "Error: could not open file '%s'\n", filename);
@@ -28,7 +28,7 @@ void readMatrix(const char *filename, int *matrix, int rows, int cols) {
     fclose(fp);
 }
 
-void writeMatrix(const char *filename, int *matrix, int rows, int cols) {
+void writeMatrix(const char *filename, double *matrix, int rows, int cols) {
     FILE *fp = fopen(filename, "w");
     if (!fp) {
         fprintf(stderr, "Error: could not open output file '%s'\n", filename);
@@ -115,10 +115,10 @@ int main() {
     printf("Enter M: "); scanf("%d", &M);
     printf("Enter P: "); scanf("%d", &P);
 
-    int *A = malloc(N * M * sizeof(double));
-    int *B = malloc(M * P * sizeof(double));
-    int *C_seq = malloc(N * P * sizeof(double));
-    int *C_par = malloc(N * P * sizeof(double));
+    double *A = malloc(N * M * sizeof(double));
+    double *B = malloc(M * P * sizeof(double));
+    double *C_seq = malloc(N * P * sizeof(double));
+    double *C_par = malloc(N * P * sizeof(double));
 
     if (!A || !B || !C_seq || !C_par) {
         fprintf(stderr, "Error allocating memory.\n");
