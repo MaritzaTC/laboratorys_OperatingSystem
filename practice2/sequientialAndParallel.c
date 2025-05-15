@@ -61,7 +61,7 @@ void parallelMatrixMultiplication(double *A, double *B, double *C, int N, int M,
         exit(EXIT_FAILURE);
     }
 
-    double *sharedC = (int *)shmat(shmid, NULL, 0);
+    double *sharedC = (double  *)shmat(shmid, NULL, 0);
     if ((intptr_t)sharedC == -1) {
         perror("shmat");
         exit(EXIT_FAILURE);
